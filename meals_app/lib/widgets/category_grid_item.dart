@@ -19,7 +19,7 @@ class CategoryGridItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           gradient: LinearGradient(
             colors: [
-              category.color.withAlpha((0.4 * 255).toInt()),
+              category.color.withAlpha((0.28 * 255).toInt()),
               category.color,
             ],
             begin: Alignment.topLeft,
