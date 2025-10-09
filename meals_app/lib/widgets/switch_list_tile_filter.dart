@@ -1,41 +1,30 @@
 import 'package:flutter/material.dart';
 
-class FilterSwitchListTile extends StatefulWidget {
-  const FilterSwitchListTile({super.key, required this.value, required this.mealType});
+class FilterSwitchListTile extends StatelessWidget {
+  const FilterSwitchListTile({
+    super.key, 
+    required this.value, 
+    required this.mealType,
+    required this.onChanged,
+  });
 
   final bool value;
   final String mealType;
-
-  @override
-  State<FilterSwitchListTile> createState() => _FilterSwitchListTileState();
-}
-
-class _FilterSwitchListTileState extends State<FilterSwitchListTile> {
-  late bool _currentValue;
-
-  @override
-  void initState() {
-    super.initState();
-    _currentValue = widget.value;
-  }
+  final void Function(bool) onChanged;
 
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
-      value: _currentValue,
-      onChanged: (isChecked) {
-        setState(() {
-          _currentValue = isChecked;
-        });
-      },
+      value: value,
+      onChanged: onChanged,
       title: Text(
-        widget.mealType,
+        mealType,
         style: Theme.of(context).textTheme.titleLarge!.copyWith(
           color: Theme.of(context).colorScheme.onSurface,
         ),
       ),
       subtitle: Text(
-        'Only include ${ widget.mealType} meals',
+        'Only include ${mealType} meals',
         style: Theme.of(context).textTheme.labelMedium!.copyWith(
           color: Theme.of(context).colorScheme.onSurface,
         ),

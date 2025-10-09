@@ -4,7 +4,9 @@ import 'package:meals_app/widgets/switch_list_tile_filter.dart';
 enum Filter { glutenFree, lactoseFree, vegetarian, vegan }
 
 class FiltersScreen extends StatefulWidget {
-  const FiltersScreen({super.key});
+  const FiltersScreen({super.key, required this.currentFilters});
+
+  final Map<Filter, bool> currentFilters;
 
   @override
   State<FiltersScreen> createState() => _FiltersScreenState();
@@ -15,6 +17,15 @@ class _FiltersScreenState extends State<FiltersScreen> {
   var _lactoseFilteredSet = false;
   var _vegetarianFilteredSet = false;
   var _veganFilteredSet = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _glutenFreeFilteredSet = widget.currentFilters[Filter.glutenFree]!;
+    _lactoseFilteredSet = widget.currentFilters[Filter.lactoseFree]!;
+    _vegetarianFilteredSet = widget.currentFilters[Filter.vegetarian]!;
+    _veganFilteredSet = widget.currentFilters[Filter.vegan]!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,16 +47,39 @@ class _FiltersScreenState extends State<FiltersScreen> {
             FilterSwitchListTile(
               value: _glutenFreeFilteredSet,
               mealType: 'Gluten free',
+              onChanged: (isChecked) {
+                setState(() {
+                  _glutenFreeFilteredSet = isChecked;
+                });
+              },
             ),
             FilterSwitchListTile(
               value: _lactoseFilteredSet,
               mealType: 'Lactose free',
+              onChanged: (isChecked) {
+                setState(() {
+                  _lactoseFilteredSet = isChecked;
+                });
+              },
             ),
             FilterSwitchListTile(
               value: _vegetarianFilteredSet,
               mealType: 'Vegetarian',
+              onChanged: (isChecked) {
+                setState(() {
+                  _vegetarianFilteredSet = isChecked;
+                });
+              },
             ),
-            FilterSwitchListTile(value: _veganFilteredSet, mealType: 'Vegan'),
+            FilterSwitchListTile(
+              value: _veganFilteredSet, 
+              mealType: 'Vegan',
+              onChanged: (isChecked) {
+                setState(() {
+                  _veganFilteredSet = isChecked;
+                });
+              },
+            ),
           ],
         ),
       ),
