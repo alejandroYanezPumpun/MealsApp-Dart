@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/data/dummy_data.dart';
 import 'package:meals_app/screens/categories_screens.dart';
 import 'package:meals_app/screens/filters_screen.dart';
 import 'package:meals_app/screens/meals_screen.dart';
 import 'package:meals_app/widgets/main_drawer.dart';
-import 'package:meals_app/models/meals_provider.dart';
 import 'package:meals_app/models/meal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -71,9 +71,8 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final meals = ref.watch(mealsProvider);
     final avaliableMeals =
-        meals.where((meal) {
+        dummyMeals.where((meal) {
           if (_selectedFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
             return false;
           }
